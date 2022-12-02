@@ -19,7 +19,7 @@ import java.io.FileNotFoundException;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(System.in);
-
+        String attempt = "";
         String word = generateWord();
         String Underlined = generateUnderlines(word);
 
@@ -29,22 +29,23 @@ public class App {
 
         System.out.println("Guess a Letter!");
         String guess = in.nextLine();
-        System.out.println(guessChar(guess.charAt(0), word));
-        Underlined = guessChar(guess.charAt(0), word);
+        attempt = (guessChar(guess.charAt(0), word, attempt));
+        Underlined = guessChar(guess.charAt(0), word, attempt);
         while (Underlined != word) {
             System.out.println("Guess another Letter!");
             guess = in.nextLine();
-            System.out.println(guessChar(guess.charAt(0), word));
-            Underlined = guessChar(guess.charAt(0), word);
+            attempt = (guessChar(guess.charAt(0), word, attempt ));
+            Underlined = guessChar(guess.charAt(0), word, attempt);
         }
 
 
 
     }
 
-    public static String guessChar(char guess, String word) {
+    public static String guessChar(char guess, String word, String attempt) {
         // empty string to put the letters and print the underlines again
         String a = "";
+        String b = "";
         // check loop for each letter in the word
         for (int i = 0; i < word.length(); i++) {
             if (guess == word.charAt(i)) {
@@ -55,18 +56,26 @@ public class App {
                 // if guess doesnt match with what the letter is, add underlines
                 a += "_ ";
             }
-
+            
         }
-
-        return a;
+        for (int i = 0; i < word.length(); i++){
+            if (a.charAt(i) != attempt.charAt(i)){
+                b += attempt;
+            }else{
+                b += a; 
+            }
+        }
+        return b;
 
     }
 
     public static String generateWord() throws Exception{
+        //get file from bin to get the words
         File Object = new File("bin/Words.txt");
         Scanner reader = new Scanner(Object);
         // generates word from an array of words
         Random rand = new Random();
+        //create arraylist for words to be appended
         ArrayList<String> Words = new ArrayList<String>();
         while (reader.hasNextLine()){
             String appenededWord = reader.nextLine();
@@ -83,11 +92,11 @@ public class App {
 
     public static String generateUnderlines(String word) {
         // generates underlines for set word
-        String kek = "";
+        String underlines = "";
         for (int i = 0; i < word.length(); i++) {
-            kek += "_ ";
+            underlines += "_ ";
         }
-        return kek;
+        return underlines;
 
     }
 
