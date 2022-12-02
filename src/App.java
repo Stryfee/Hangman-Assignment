@@ -1,4 +1,7 @@
 import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 
 /*
  * HANG MAN
@@ -15,27 +18,27 @@ import java.util.*;
  */
 public class App {
     public static void main(String[] args) throws Exception {
-        // Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
 
-        // String word = generateWord();
-        // String Underlined = generateUnderlines(word);
+        String word = generateWord();
+        String Underlined = generateUnderlines(word);
 
-        // // check to see if stuff works, del after
-        // System.out.println(word);
-        // System.out.println(Underlined);
+        // check to see if stuff works, del after
+        System.out.println(word);
+        System.out.println(Underlined);
 
-        // System.out.println("Guess a Letter!");
-        // String guess = in.nextLine();
-        // System.out.println(guessChar(guess.charAt(0), word));
-        // Underlined = guessChar(guess.charAt(0), word);
-        // while (Underlined != word) {
-        //     System.out.println("Guess another Letter!");
-        //     guess = in.nextLine();
-        //     System.out.println(guessChar(guess.charAt(0), word));
-        //     Underlined = guessChar(guess.charAt(0), word);
-        // }
+        System.out.println("Guess a Letter!");
+        String guess = in.nextLine();
+        System.out.println(guessChar(guess.charAt(0), word));
+        Underlined = guessChar(guess.charAt(0), word);
+        while (Underlined != word) {
+            System.out.println("Guess another Letter!");
+            guess = in.nextLine();
+            System.out.println(guessChar(guess.charAt(0), word));
+            Underlined = guessChar(guess.charAt(0), word);
+        }
 
-        hangman(6);
+
 
     }
 
@@ -59,14 +62,21 @@ public class App {
 
     }
 
-    public static String generateWord() {
+    public static String generateWord() throws Exception{
+        File Object = new File("bin/Words.txt");
+        Scanner reader = new Scanner(Object);
         // generates word from an array of words
         Random rand = new Random();
-        String[] words = { "cook", "bowls", "virginia" };
+        ArrayList<String> Words = new ArrayList<String>();
+        while (reader.hasNextLine()){
+            String appenededWord = reader.nextLine();
+            Words.add(appenededWord);
+        }
+        reader.close();
         // get random num as index for the chosen word
-        int randomnum = rand.nextInt(words.length);
+        int randomnum = rand.nextInt(Words.size());
         // store chosen word in a variable
-        String ChosenWord = words[randomnum];
+        String ChosenWord = Words.get(randomnum);
         // return variable
         return ChosenWord;
     }
@@ -90,6 +100,8 @@ public class App {
             System.out.println(" / \\  |");
             System.out.println("      | ");
             System.out.println("=========");
+        }else if(a == 5){
+            
         }
     }
 
