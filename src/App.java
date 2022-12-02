@@ -59,7 +59,7 @@ public class App {
             
         }
         for (int i = 0; i < word.length(); i++){
-            if (a.charAt(i) != attempt.charAt(i)){
+            if (a.charAt(i+1) != attempt.charAt(i+1)){
                 b += attempt;
             }else{
                 b += a; 
