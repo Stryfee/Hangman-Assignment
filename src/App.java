@@ -31,11 +31,14 @@ public class App {
         String guess = in.nextLine();
         attempt = (guessChar(guess.charAt(0), word, attempt));
         Underlined = guessChar(guess.charAt(0), word, attempt);
+        System.out.println(Underlined);
         while (Underlined != word) {
             System.out.println("Guess another Letter!");
             guess = in.nextLine();
             attempt = (guessChar(guess.charAt(0), word, attempt ));
             Underlined = guessChar(guess.charAt(0), word, attempt);
+            System.out.println(Underlined);
+
         }
 
 
@@ -49,17 +52,15 @@ public class App {
         // check loop for each letter in the word
         for (int i = 0; i < word.length(); i++) {
             if (guess == word.charAt(i)) {
-                // store letter at specific spot(ex. guess = v, word = virginia, store v at
-                // first letter of word)
                 a += (guess + " ");
             } else {
-                // if guess doesnt match with what the letter is, add underlines
                 a += "_ ";
             }
             
         }
+        
         for (int i = 0; i < word.length(); i++){
-            if (a.charAt(i+1) != attempt.charAt(i+1)){
+            if (a.charAt(i) != attempt.charAt(i)){
                 b += attempt;
             }else{
                 b += a; 
