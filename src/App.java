@@ -29,15 +29,13 @@ public class App {
 
         System.out.println("Guess a Letter!");
         String guess = in.nextLine();
-        attempt = (guessChar(guess.charAt(0), word, attempt));
-        Underlined = guessChar(guess.charAt(0), word, attempt);
-        System.out.println(Underlined);
-        while (Underlined != word) {
+        attempt = (guessChar(word, attempt, guess.charAt(0)));
+        System.out.println(attempt);
+        while (attempt != word) {
             System.out.println("Guess another Letter!");
             guess = in.nextLine();
-            attempt = (guessChar(guess.charAt(0), word, attempt ));
-            Underlined = guessChar(guess.charAt(0), word, attempt);
-            System.out.println(Underlined);
+            attempt = (guessChar(word, attempt, guess.charAt(0)));
+            System.out.println(attempt);
 
         }
 
@@ -45,29 +43,30 @@ public class App {
 
     }
 
-    public static String guessChar(char guess, String word, String attempt) {
-        // empty string to put the letters and print the underlines again
-        String a = "";
-        String b = "";
-        // check loop for each letter in the word
-        for (int i = 0; i < word.length(); i++) {
-            if (guess == word.charAt(i)) {
-                a += (guess + " ");
-            } else {
-                a += "_ ";
-            }
-            
-        }
-        
+    public static String guessChar(String word, String Attempt, char Guess) {
+        ArrayList<Character> placeholder = new ArrayList<Character>();
+        ArrayList<Character> wordList = new ArrayList<Character>(); 
         for (int i = 0; i < word.length(); i++){
-            if (a.charAt(i) != attempt.charAt(i)){
-                b += attempt;
+            wordList.add(word.charAt(i));
+        }
+        String b = "";
+        for (int i = 0; i < word.length(); i++){
+            if (Guess == word.charAt(i)){
+                placeholder.add(Guess);
             }else{
-                b += a; 
+                placeholder.add('_');
             }
         }
-        return b;
 
+        for (int i = 0; i < word.length(); i++){
+            if (placeholder.get(i) != Attempt.charAt(i)){
+                b += placeholder.get(i);
+            }else{
+                b += "_ ";
+            }
+        }
+
+        return b;
     }
 
     public static String generateWord() throws Exception{
