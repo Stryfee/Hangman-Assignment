@@ -1,6 +1,5 @@
 import java.util.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 
 /*
  * HANG MAN
@@ -29,18 +28,24 @@ public class App {
         String guess = in.nextLine();
         Attempt = (guessChar(word, Attempt, guess.charAt(0)));
         System.out.println(Attempt);
+
         while (Attempt != word) {
             System.out.println("Guess another Letter!");
             guess = in.nextLine();
             Attempt = (guessChar(word, Attempt, guess.charAt(0)));
             System.out.println(Attempt);
-        }
 
+        }
+        
+        in.close();
     }
 
     public static String guessChar(String word, String Attempt, char Guess) {
         String a = "";
-        String b = "";
+        ArrayList <Character> b = new ArrayList<Character>();
+        for (int i = 0; i<Attempt.length(); i++){
+            b.add(Attempt.charAt(i));
+        }
         for (int i = 0; i < word.length(); i++) {
             if (Guess == word.charAt(i)) {
                 a += Guess + " ";
@@ -48,14 +53,17 @@ public class App {
                 a += "_ ";
             }
         }
-        for (int i = 0; i < Attempt.length(); i++) {
-            if (a.charAt(i) == Attempt.charAt(i)) {
-                b += Attempt.charAt(i);
-            } else {
-                b += a.charAt(i);
+
+        for (int i = 0; i< Attempt.length(); i++){
+            if (a.charAt(i) != Attempt.charAt(i)){
+                b.set(i,a.charAt(i));
             }
         }
-        return b;
+        String p = "";
+        for (int i = 0; i < b.size(); i++){
+            p += b.get(i);
+        }
+        return p;
     }
 
     public static String generateWord() throws Exception {
