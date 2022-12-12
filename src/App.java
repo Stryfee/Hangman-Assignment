@@ -41,29 +41,26 @@ public class App {
     }
 
     public static String guessChar(String word, String Attempt, char Guess) {
-        String a = "";
-        ArrayList <Character> b = new ArrayList<Character>();
+        ArrayList <Character> checkingArray = new ArrayList<Character>();
         for (int i = 0; i<Attempt.length(); i++){
-            b.add(Attempt.charAt(i));
+            checkingArray.add(Attempt.charAt(i));
+            System.out.print(checkingArray.get(i));
+            
         }
         for (int i = 0; i < word.length(); i++) {
             if (Guess == word.charAt(i)) {
-                a += Guess + " ";
+                checkingArray.set(i, Guess);
             } else {
-                a += "_ ";
+                checkingArray.set(i,'_');
             }
+            checkingArray.set(i,' ');
         }
 
-        for (int i = 0; i< Attempt.length(); i++){
-            if (a.charAt(i) != Attempt.charAt(i)){
-                b.set(i,a.charAt(i));
-            }
+        String returnString = "";
+        for (int i = 0; i < checkingArray.size(); i++){
+            returnString += checkingArray.get(i);
         }
-        String p = "";
-        for (int i = 0; i < b.size(); i++){
-            p += b.get(i);
-        }
-        return p;
+        return returnString;
     }
 
     public static String generateWord() throws Exception {
