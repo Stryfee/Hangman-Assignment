@@ -43,9 +43,10 @@ public class App {
     public static String guessChar(String word, String Attempt, char Guess) {
         ArrayList <Character> checkingArray = new ArrayList<Character>();
         for (int i = 0; i<Attempt.length(); i++){
+            if(Attempt.charAt(i) == ' '){
+                continue;
+            }
             checkingArray.add(Attempt.charAt(i));
-            System.out.print(checkingArray.get(i));
-            
         }
         for (int i = 0; i < word.length(); i++) {
             if (Guess == word.charAt(i)) {
@@ -53,7 +54,6 @@ public class App {
             } else {
                 checkingArray.set(i,'_');
             }
-            checkingArray.set(i,' ');
         }
 
         String returnString = "";
