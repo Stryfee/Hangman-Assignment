@@ -15,6 +15,8 @@ import java.io.File;
  * 
  */
 public class App {
+    public static int hang = 0;
+    public static String wrongLetters = "";
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(System.in);
         String word = generateWord();
@@ -29,38 +31,40 @@ public class App {
         Attempt = (guessChar(word, Attempt, guess.charAt(0)));
         System.out.println(Attempt);
 
-        while (Attempt != word) {
+        while (!Attempt.equals(word)) {
             System.out.println("Guess another Letter!");
             guess = in.nextLine();
             Attempt = (guessChar(word, Attempt, guess.charAt(0)));
             System.out.println(Attempt);
-
         }
-        
-        in.close();
+        System.out.printf("You win! %s was the word!%n",word);
     }
 
     public static String guessChar(String word, String Attempt, char Guess) {
-        ArrayList <Character> checkingArray = new ArrayList<Character>();
-        for (int i = 0; i<Attempt.length(); i++){
-            if(Attempt.charAt(i) == ' '){
-                continue;
+        /* 
+        "abc" "_ b _ "
+        "_b_" guess = a
+        "ab_"
+        
+        */ 
+        int count = 0;
+        String checkingString = Attempt.replaceAll(" ", "");
+        String new_str = "";
+        for(int i = 0; i <word.length(); i++){
+            if(Guess == word.charAt(i)){ 
+                new_str += Guess;
+                count++;
+                checkingString.replace(word.charAt(i)+"", Guess+"");
+            }else{
+                new_str += checkingString.charAt(i);
             }
-            checkingArray.add(Attempt.charAt(i));
         }
-        for (int i = 0; i < word.length(); i++) {
-            if (Guess == word.charAt(i)) {
-                checkingArray.set(i, Guess);
-            } else {
-                checkingArray.set(i,'_');
-            }
+        if (count == 0){
+            wrongLetters += Guess +" ";
+            hangman(++hang);
+            System.out.println("Wrong letters: "+ wrongLetters.toUpperCase());
         }
-
-        String returnString = "";
-        for (int i = 0; i < checkingArray.size(); i++){
-            returnString += checkingArray.get(i);
-        }
-        return returnString;
+        return new_str;
     }
 
     public static String generateWord() throws Exception {
