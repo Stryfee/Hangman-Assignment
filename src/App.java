@@ -17,13 +17,28 @@ import java.io.File;
 public class App {
     public static int hang = 0;
     public static String wrongLetters = "";
-    public static void main(String[] args) throws Exception {
+    
+    public static void main (String[] args) throws Exception{
+        String repeat = "";
+        Scanner in = new Scanner(System.in);
+        System.out.println("Welcome To Hangman!, would you like to learn how to play? (y/n)");
+        String ans = in.nextLine();
+        if (ans.equalsIgnoreCase("yes") || ans.equalsIgnoreCase("y")) {
+            System.out.println("the computer picks a word and you try to guess it by guessing letters. Each incorrect guess brings you closer to being \"hanged.\"");
+        }
+        System.out.println("Lets begin!");
+        while (!(repeat.equals("n")) || (repeat.equalsIgnoreCase("no"))){
+            game();
+            System.out.println("Would you like to play again? (y/n)");
+            repeat = in.nextLine();
+        }
+    }
+    public static void game() throws Exception {
         Scanner in = new Scanner(System.in);
         String word = generateWord();
         String Attempt = generateUnderlines(word);
 
-        // check to see if stuff works, del after
-        System.out.println(word);
+
         System.out.println(Attempt);
 
         System.out.println("Guess a Letter!");
@@ -32,21 +47,23 @@ public class App {
         System.out.println(Attempt);
 
         while (!Attempt.equals(word)) {
+            if(hang >= 6){
+                break;
+            }
             System.out.println("Guess another Letter!");
             guess = in.nextLine();
             Attempt = (guessChar(word, Attempt, guess.charAt(0)));
             System.out.println(Attempt);
         }
-        System.out.printf("You win! %s was the word!%n",word);
+        if(Attempt.equals(word) || hang<6){
+            System.out.printf("You win! %s was the word!%n",word);
+        }else{
+            System.out.printf("You Lose! %s was the word!%n",word);
+        }
+       
     }
 
     public static String guessChar(String word, String Attempt, char Guess) {
-        /* 
-        "abc" "_ b _ "
-        "_b_" guess = a
-        "ab_"
-        
-        */ 
         int count = 0;
         String checkingString = Attempt.replaceAll(" ", "");
         String new_str = "";
@@ -63,6 +80,8 @@ public class App {
             wrongLetters += Guess +" ";
             hangman(++hang);
             System.out.println("Wrong letters: "+ wrongLetters.toUpperCase());
+        }else{
+            hangman(hang);
         }
         return new_str;
     }
