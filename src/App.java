@@ -17,6 +17,15 @@ import java.io.File;
 public class App {
     public static int hang = 0;
     public static String wrongLetters = "";
+    public static void wrongGuess(char a){
+        if (wrongLetters.contains(a +"")){
+            System.out.println("You already used this word!");
+        }else{
+            wrongLetters += a + " ";
+            hangman(++hang);
+        }
+        System.out.println("Wrong letters: "+ wrongLetters.toUpperCase());
+    }
     
     public static void main (String[] args) throws Exception{
         String repeat = "";
@@ -31,6 +40,8 @@ public class App {
             game();
             System.out.println("Would you like to play again? (y/n)");
             repeat = in.nextLine();
+            hang = 0;
+            wrongLetters = "";
         }
     }
     public static void game() throws Exception {
@@ -77,9 +88,7 @@ public class App {
             }
         }
         if (count == 0){
-            wrongLetters += Guess +" ";
-            hangman(++hang);
-            System.out.println("Wrong letters: "+ wrongLetters.toUpperCase());
+            wrongGuess(Guess);
         }else{
             hangman(hang);
         }
