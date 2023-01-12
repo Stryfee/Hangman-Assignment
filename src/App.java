@@ -54,19 +54,29 @@ public class App {
 
         System.out.println("Guess a Letter!");
         String guess = in.nextLine();
+        while(!(guess.trim() == " ")){
+            System.out.println("you cannot enter a blank character!");
+            System.out.println("Guess a Letter!");
+            guess = in.nextLine();
+        }
         Attempt = (guessChar(word, Attempt, guess.charAt(0)));
         System.out.println(Attempt);
 
         while (!Attempt.equals(word)) {
-            if(hang >= 6){
+            if(hang >= 12){
                 break;
             }
             System.out.println("Guess another Letter!");
             guess = in.nextLine();
+            while(!(guess.trim() == " ")){
+                System.out.println("you cannot enter a blank character!");
+                System.out.println("Guess a Letter!");
+                guess = in.nextLine();
+            }
             Attempt = (guessChar(word, Attempt, guess.charAt(0)));
             System.out.println(Attempt);
         }
-        if(Attempt.equals(word) || hang<6){
+        if(Attempt.equals(word) || hang<12){
             System.out.printf("You win! %s was the word!%n",word);
         }else{
             System.out.printf("You Lose! %s was the word!%n",word);
@@ -127,7 +137,7 @@ public class App {
     }
 
     public static void hangman(int a) {
-        if (a == 12) {
+        if (a >= 11) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
@@ -135,7 +145,7 @@ public class App {
             System.out.println(" / \\  |");
             System.out.println("      | ");
             System.out.println("=========");
-        } else if (a == 10) {
+        } else if (a >= 9) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
@@ -143,7 +153,7 @@ public class App {
             System.out.println(" /    |");
             System.out.println("      | ");
             System.out.println("=========");
-        } else if (a == 8) {
+        } else if (a >= 7) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
@@ -151,7 +161,7 @@ public class App {
             System.out.println("      |");
             System.out.println("      | ");
             System.out.println("=========");
-        } else if (a == 6) {
+        } else if (a >= 5) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
@@ -159,7 +169,7 @@ public class App {
             System.out.println("      |");
             System.out.println("      | ");
             System.out.println("=========");
-        } else if (a == 4) {
+        } else if (a >= 3) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
@@ -167,7 +177,7 @@ public class App {
             System.out.println("      |");
             System.out.println("      | ");
             System.out.println("=========");
-        } else if (a == 2) {
+        } else if (a >= 1) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
@@ -175,7 +185,7 @@ public class App {
             System.out.println("      |");
             System.out.println("      | ");
             System.out.println("=========");
-        } else if (a == 0) {
+        } else if (a >= 0) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("      | ");
