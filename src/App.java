@@ -127,7 +127,7 @@ public class App {
     }
 
     public static void hangman(int a) {
-        if (a == 6) {
+        if (a == 12) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
@@ -135,7 +135,7 @@ public class App {
             System.out.println(" / \\  |");
             System.out.println("      | ");
             System.out.println("=========");
-        } else if (a == 5) {
+        } else if (a == 10) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
@@ -143,7 +143,7 @@ public class App {
             System.out.println(" /    |");
             System.out.println("      | ");
             System.out.println("=========");
-        } else if (a == 4) {
+        } else if (a == 8) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
@@ -151,7 +151,7 @@ public class App {
             System.out.println("      |");
             System.out.println("      | ");
             System.out.println("=========");
-        } else if (a == 3) {
+        } else if (a == 6) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
@@ -159,7 +159,7 @@ public class App {
             System.out.println("      |");
             System.out.println("      | ");
             System.out.println("=========");
-        } else if (a == 2) {
+        } else if (a == 4) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
@@ -167,7 +167,7 @@ public class App {
             System.out.println("      |");
             System.out.println("      | ");
             System.out.println("=========");
-        } else if (a == 1) {
+        } else if (a == 2) {
             System.out.println("  +---+ ");
             System.out.println("  |   | ");
             System.out.println("  O   | ");
