@@ -54,10 +54,12 @@ public class App {
 
         System.out.println("Guess a Letter!");
         String guess = in.nextLine();
-        while(!(guess.trim() == " ")){
-            System.out.println("you cannot enter a blank character!");
-            System.out.println("Guess a Letter!");
-            guess = in.nextLine();
+        if(guess.trim()==""){
+         while(!(guess.trim() == "")){
+                System.out.println("you cannot enter a blank character!");
+                System.out.println("Guess a Letter!");
+                guess = in.nextLine();
+            }
         }
         Attempt = (guessChar(word, Attempt, guess.charAt(0)));
         System.out.println(Attempt);
@@ -68,11 +70,13 @@ public class App {
             }
             System.out.println("Guess another Letter!");
             guess = in.nextLine();
-            while(!(guess.trim() == " ")){
-                System.out.println("you cannot enter a blank character!");
-                System.out.println("Guess a Letter!");
-                guess = in.nextLine();
-            }
+            if(guess.trim()==""){
+                while(!(guess.trim() == "")){
+                       System.out.println("you cannot enter a blank character!");
+                       System.out.println("Guess a Letter!");
+                       guess = in.nextLine();
+                   }
+               }
             Attempt = (guessChar(word, Attempt, guess.charAt(0)));
             System.out.println(Attempt);
         }
@@ -88,6 +92,14 @@ public class App {
         int count = 0;
         String checkingString = Attempt.replaceAll(" ", "");
         String new_str = "";
+        for(int i = 0; i < 10; i++){
+            String Number = i+"";
+            String placeHolder = Guess+"";
+            if(Number.equalsIgnoreCase(placeHolder)){
+                System.out.println("You cannot use number as a guess!");
+                return Attempt;
+            }
+        }
         for(int i = 0; i <word.length(); i++){
             if(Guess == word.charAt(i)){ 
                 new_str += Guess;
